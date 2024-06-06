@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Transaksi Pembayaran</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7d10f775-0783-47af-a14f-213704ee8a2a" class="page sans"><header><h1 class="page-title">Transaksi Pembayaran</h1><p class="page-description"></p></header><div class="page-body"><figure id="c552e682-3e30-43f1-b972-3c672fff0967" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled.png"><img style="width:1033px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled.png"/></a></figure><nav id="0dbca418-cbc7-42ed-856c-e66a6a8c7d0a" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#66c86d85-fdae-4817-a933-825a2a7b6b2e">Prosedur Pembayaran Tunai</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9f3a6cef-a7e1-427a-9245-b8c09edb54c4">A. Ciri-Ciri Uang</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7188edfc-a6d5-4e63-8fd3-540758f544f5">B. Uang Pecahan 1000 TE 2016</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#463ffcb1-8ecf-4927-8203-bb7a432a3263">C. Uang Pecahan 5000 TE 2016</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#74d34726-3803-49c2-9a8e-17d9b462df90">D. Uang Pecahan 10000 TE 2016</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f7e7fa79-d603-44c5-bb21-2b7941329e67">E. Uang Pecahan 20000 TE 2016</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#def0ba4e-084e-4e7f-9f1c-96d7b635ffb3">F. Uang Pecahan 50000 TE 2016</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#61c36fc6-11a7-4d0b-b5c9-7c14d9c29d59">G. Uang Pecahan 100000 TE 2016</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0b23e3c3-1076-4e53-89a8-9361df470ea3">H. Proses Transaksi</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b42520e0-3479-4b46-9007-af00cacaeab1">Prosedur Pembayaran dengan Kartu Debit BCA</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6e9cf598-2ee0-415b-9d1e-d4b82224d044">A. Proses Customer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3c229a73-a115-4067-a763-d30f8c752055">B. Proses POS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c28fb4fd-8ac1-4591-b669-d2a2a49a5180">C. Proses EDC</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9077f25f-7634-4b2d-81b0-5ef8385fe2b9">Prosedur Tunai BCA</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#aaae842f-d1da-411e-9adf-952a0a25a7b6">A. Proses Customer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3159fca5-0175-4690-aced-dfd12788de2c">B. Proses POS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5c432a39-08b3-4381-b18d-3c10e8908327">C. Proses EDC</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cdf5ade0-ae3a-4c88-b901-8be65eb41f6f">Prosedur Pembayaran dengan Kartu Kredit</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#42a60c27-e9df-4e47-982f-9318d256b8b7">A. Proses Customer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f617a844-cef2-4c9c-b9d1-e67f3e68a937">B. Proses POS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#00c64005-1785-4547-af0c-17ec2fdf0974">C. Proses EDC</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4d83e75a-3712-48fa-863a-0bca8de1bd4a">Prosedur Pembayaran dengan Voucher Belanja Super Indo</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#05fcf19b-12f7-498a-820b-63385c3279eb">A. Konfirmasi Customer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cb2f1e4c-0c8b-4ce7-9839-5ede0274583d">B. Proses POS</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2a43cdc9-1ae6-4838-b76c-36794d3e254f">Ketentuan Penjualan dan Pembayaran Gift Card</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9d0ef6b5-fcf5-43c8-ac22-4dd8be216172">A. Penjualan Gift Card</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#951f0fa1-cd76-4987-a8a4-b9ea936cf421">B. Aktivasi Gift Card</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3488a511-c69e-4c55-9aa9-a632567ae35a">C. Pembayaran Menggunakan Gift Card</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#03d7cb79-da19-4c70-a33c-f9600433b091">D. Lain-Lain</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#174f273d-6756-4d82-9666-e525abb2f2c1">Prosedur Pembayaran dengan Kartu FLAZZ BCA</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4b8c436e-bb57-4bf7-b404-dee349837b97">A. Proses Customer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f63a70c4-ced6-4eb9-88bf-4fed8ff6fa5f">B. Proses POS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cd29a52d-b721-4221-861a-d7ebff8b4613">C. Proses EDC</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1a2870e8-8b6b-404b-b7ad-2d15480a453e">D. Penyelesaian Proses</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cdd83932-c87b-4287-8619-78b7ec93baec">Prosedur Pembayaran dengan E-Money</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6d02a861-e65c-4e26-b36b-d7947b4f3c2e">A. Proses Customer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#73caac5b-9c4a-48df-929c-4beaab6e5bc1">B. Proses POS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#18f38238-b04f-4df5-8f65-665acf7d98d9">C. Proses EDC</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bdf010a2-8109-43bd-9ba3-2e49962b4ea7">D. Penyelesaian Proses</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f27b1487-1d76-4bc2-bf24-211ca1c7f18e">Prosedur ALP (Associates Loyalty Program)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eaf69a1f-6d66-4b90-b1fc-a7cd8195d149">A. Transaksi dengan ALP</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#01cd2180-1dc3-4aca-9520-01ef83d42594">B. Pembatalan ALP</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0766ec20-455f-4a08-8f68-173ee9ca8d1e">Quiz</a></div></nav><h1 id="66c86d85-fdae-4817-a933-825a2a7b6b2e" class="">Prosedur Pembayaran Tunai</h1><p id="a87c75a1-e884-4f1e-aabb-97c5efd444ec" class=""><strong>Ketentuan</strong></p><ol type="1" id="55b4710f-8ec7-492c-99c3-f6ca8870758f" class="numbered-list" start="1"><li>Pembayaran tunai yang dimaksud adalah pembayaran dengan menggunakan uang tunai/cash dengan tidak ada batasan minimal dan maksimal pembelanjaan. </li></ol><ol type="1" id="02572775-1a17-4dfa-802d-9068be029e9f" class="numbered-list" start="2"><li>Pembayaran dengan tunai akan berlaku pembulatan pembayaran baik pembulatan ke atas atau ke bawah. </li></ol><ol type="1" id="54c860ad-9340-4701-be3a-36fae6c76c25" class="numbered-list" start="3"><li>Pembulatan pembayaran baik pembulatan ke atas atau ke bawah dilakukan secara sistem. Adapun Jenis pembulatannya adalah sebagai berikut :<ol type="a" id="bbb4e9a7-4667-4074-bc80-b75ec996cc8d" class="numbered-list" start="1"><li>Pembulatan ke bawah: pembulatan pembayaran dengan besar nominal puluhan &lt; Rp 50,- akan dibulatkan ke bawah. Contoh: Nilai pembayaran sebesar Rp 153.740,- , maka nilai pembayaran akan dibulatkan menjadi Rp 153.700,-.</li></ol><ol type="a" id="2357dd42-9eda-4e65-ac33-4ccdb6685fdd" class="numbered-list" start="2"><li>Pembulatan ke atas: pembulatan pembayaran dengan besar nominal puluhan Rp 50,- akan dibulatkan ke atas. Contoh: Nilai pembayaran sebesar Rp 34.280,- maka nilai pembayaran akan dibulatkan menjadi Rp 34.300,-. </li></ol></li></ol><ol type="1" id="aea78ca9-9d90-4f1e-bc0e-d2fab91a4de1" class="numbered-list" start="4"><li>Uang yang diterima dari customer adalah uang yang berlaku di Negara Republik Indonesia dengan pecahan rupiah: <ol type="a" id="0f458fa6-6638-49fb-807c-d4630ddbf04a" class="numbered-list" start="1"><li>Rp 50,- (lima puluh rupiah) </li></ol><ol type="a" id="4d3763fd-097a-46fd-92e6-58a071a4cfed" class="numbered-list" start="2"><li>Rp 100,- (seratus rupiah) </li></ol><ol type="a" id="f13a7916-c624-49e9-8e18-a122c9d0b9c5" class="numbered-list" start="3"><li>Rp 200,- (dua ratus rupiah) </li></ol><ol type="a" id="80cf5b9f-dcba-4680-9286-d32392ebfb07" class="numbered-list" start="4"><li>Rp 500,- (lima ratus rupiah) </li></ol><ol type="a" id="8eef90cd-1597-418f-acc0-ec5052256243" class="numbered-list" start="5"><li>Rp 1.000,- (seribu rupiah) </li></ol><ol type="a" id="747fa8bb-bc98-4fe8-8880-a7848101b6c1" class="numbered-list" start="6"><li>Rp 2.000,- (dua ribu rupiah) </li></ol><ol type="a" id="c4352ba9-29e8-4891-882b-9dbd987e66fc" class="numbered-list" start="7"><li>Rp 5.000,- (lima ribu rupiah) </li></ol><ol type="a" id="a9018e35-b143-4fcd-a9ce-82bcb71ce584" class="numbered-list" start="8"><li>Rp 10.000,- (sepuluh ribu rupiah) </li></ol><ol type="a" id="61df74bd-607f-4b85-8a62-4b1653082bd0" class="numbered-list" start="9"><li>Rp 20.000,- (dua puluh ribu rupiah) </li></ol><ol type="a" id="dbdf960d-5a19-4d51-a679-4a1486dddafe" class="numbered-list" start="10"><li>Rp 50.000,- (lima puluh ribu rupiah)</li></ol><ol type="a" id="19f1e633-6c02-4982-87fb-cafc2bd4d112" class="numbered-list" start="11"><li>Rp 100.000,- (seratus ribu rupiah)</li></ol></li></ol><ol type="1" id="78474bce-54d7-4038-bcbc-b9ba1d20ddbf" class="numbered-list" start="5"><li>Bila ada uang yang diterima dari customer fisiknya mencurigakan (palsu), periksa uang tersebut dengan cara 3D (dilihat, diraba, diterawang) atau menggunakan lampu UV.</li></ol><ol type="1" id="c07f82b7-2f55-4e1f-9a28-f1355344defb" class="numbered-list" start="6"><li>Keaslian uang rupiah dapat dikenali melalui:<ol type="a" id="92abcc16-f91d-47bd-a580-da7447ee234f" class="numbered-list" start="1"><li>Bahan yang digunakan.</li></ol><ol type="a" id="7d40ba20-eb50-4b7c-a692-00107ab243a8" class="numbered-list" start="2"><li>Desain dan ukuran.</li></ol><ol type="a" id="3cf6cd2f-c904-446a-bc38-f27a0cb1c742" class="numbered-list" start="3"><li>Teknik cetak.</li></ol></li></ol><h2 id="9f3a6cef-a7e1-427a-9245-b8c09edb54c4" class="">A. Ciri-Ciri Uang</h2><figure id="042278e3-cecd-4587-853a-42e09903aa89" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%201.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%201.png"/></a></figure><figure id="e9033832-a00f-45eb-9b44-337eac98f18b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%202.png"><img style="width:996px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%202.png"/></a></figure><figure id="788136d9-899b-44ca-b5a4-b186c0be205b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%203.png"><img style="width:996px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%203.png"/></a></figure><figure id="55cc66b6-1ba8-4b5c-9427-6fc833acc2d9" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%204.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%204.png"/></a></figure><figure id="2af0f241-c39b-4900-8244-3ec378da9e71" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%205.png"><img style="width:996px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%205.png"/></a></figure><figure id="fcc58c2f-2247-40c4-b45b-b25d3f50a2f7" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%206.png"><img style="width:996px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%206.png"/></a></figure><figure id="c442643c-e0fe-4080-9206-80afc3213c22" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%207.png"><img style="width:996px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%207.png"/></a></figure><figure id="14696f93-266f-491e-aa95-873bde6dba31" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%208.png"><img style="width:996px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%208.png"/></a></figure><h2 id="7188edfc-a6d5-4e63-8fd3-540758f544f5" class="">B. Uang Pecahan 1000 TE 2016</h2><figure id="3fd9cdd7-ea4f-45de-a9e2-1a8a44789ab8" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%209.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%209.png"/></a></figure><figure id="4dece844-8942-4a5e-bc7b-c2dc63a3a8af" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2010.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2010.png"/></a></figure><figure id="7da070ed-fe69-46ea-b1f6-aa20256162e7" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2011.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2011.png"/></a></figure><h2 id="463ffcb1-8ecf-4927-8203-bb7a432a3263" class="">C. Uang Pecahan 5000 TE 2016</h2><figure id="95288fae-05b2-48c4-a1d4-22ceb274d587" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2012.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2012.png"/></a></figure><figure id="9b7d6d23-da98-4785-a8c8-7873bc624606" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2013.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2013.png"/></a></figure><figure id="637c00af-ed68-4eea-b3c9-18d245074a99" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2014.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2014.png"/></a></figure><h2 id="74d34726-3803-49c2-9a8e-17d9b462df90" class="">D. Uang Pecahan 10000 TE 2016</h2><figure id="f44a5d28-7e91-42ff-8178-6dcd9da4748e" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2015.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2015.png"/></a></figure><figure id="bb9acab2-d67e-48fe-9564-53ecb939569a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2016.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2016.png"/></a></figure><figure id="3e2a6a63-faa8-43ac-9837-296202b1d285" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2017.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2017.png"/></a></figure><h2 id="f7e7fa79-d603-44c5-bb21-2b7941329e67" class="">E. Uang Pecahan 20000 TE 2016</h2><figure id="546118df-bb65-4c1b-ad08-a57080a75599" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2018.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2018.png"/></a></figure><figure id="8b516f98-f261-4020-8a6a-f99090b12020" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2019.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2019.png"/></a></figure><figure id="cedbbe7e-e92c-4487-9312-46d955405372" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2020.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2020.png"/></a></figure><h2 id="def0ba4e-084e-4e7f-9f1c-96d7b635ffb3" class="">F. Uang Pecahan 50000 TE 2016</h2><figure id="f9f4ca79-575d-4926-aaa3-dae086ba143b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2021.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2021.png"/></a></figure><figure id="5c843321-1974-41c4-867a-5343f7552a5a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2022.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2022.png"/></a></figure><figure id="8717d708-1ae3-422b-8c00-e7e41d2ae9fe" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2023.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2023.png"/></a></figure><h2 id="61c36fc6-11a7-4d0b-b5c9-7c14d9c29d59" class="">G. Uang Pecahan 100000 TE 2016</h2><figure id="308ac6b5-ca49-4931-905e-a77bf3266f66" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2024.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2024.png"/></a></figure><figure id="207564e9-4f70-480a-bb01-655b9431cb19" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2025.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2025.png"/></a></figure><figure id="67acfe26-dae4-47a1-bac4-9c96dfc2b54d" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2026.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2026.png"/></a></figure><h2 id="0b23e3c3-1076-4e53-89a8-9361df470ea3" class="">H. Proses Transaksi</h2><figure id="329ff325-84e0-423f-8f20-06b02570c70a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2027.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2027.png"/></a></figure><figure id="67585d65-f011-431a-b408-ff9071801890" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2028.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2028.png"/></a></figure><figure id="0b71806f-0688-4490-aa62-20f0925fde8d" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2029.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2029.png"/></a></figure><div id="1fc59a39-8213-4e50-9992-4521f5bde2db" class="column-list"><div id="c6e29576-ad4b-40e4-9d0d-0cb661d82660" style="width:50%" class="column"><p id="c77cae1e-5162-4cb8-ac6a-f3635bba9a52" class="">Pembulatan Pembayaran ke Bawah</p><figure id="c7e26cdd-8610-481e-95f8-b8922c2b06d6" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2030.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2030.png"/></a></figure></div><div id="0c0285f5-8b4b-4058-9712-462b45ffd306" style="width:50%" class="column"><p id="4c17d876-21ed-41f1-b7d3-6a54f996a5e3" class="">Pembulatan Pembayaran ke Atas</p><figure id="bf80434a-d616-4bf9-a9c5-7b4a78e60328" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2031.png"><img style="width:331px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2031.png"/></a></figure></div></div><figure id="27b5f783-54f0-4ff7-98b2-bec03ab7fac2" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2032.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2032.png"/></a></figure><h1 id="b42520e0-3479-4b46-9007-af00cacaeab1" class="">Prosedur Pembayaran dengan Kartu Debit BCA</h1><p id="70d27001-3c29-4044-ad60-c40e0cc3c497" class=""><strong>Ketentuan</strong></p><ol type="1" id="68227238-8d8f-4dce-aa6f-f7e6bfece31b" class="numbered-list" start="1"><li>Pembayaran debit yang dimaksud adalah pembayaran dengan menggunakan kartu debit dari bank penerbit (contoh: debit BCA, Prima debit, Mandiri dll). Kartu ini mengacu pada saldo tabungan bank customer di bank penerbit.</li></ol><ol type="1" id="0a69cb73-4a34-403b-90d0-a58df70da7ef" class="numbered-list" start="2"><li>Tidak ada miminum pembayaran dengan menggunakan kartu debit BCA dan Mandiri. </li></ol><ol type="1" id="0cc4a299-9e1d-4ec9-a465-9e34ea55e485" class="numbered-list" start="3"><li>Proses otorisasi hanya dapat dilakukan pada mesin EDC yang sesuai dengan kartu bank penerbit dan memerlukan nomor PIN customer.</li></ol><h2 id="6e9cf598-2ee0-415b-9d1e-d4b82224d044" class="">A. Proses Customer</h2><figure id="431a2de5-376f-4221-93d2-b0ae49a59d1a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2033.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2033.png"/></a></figure><figure id="40c7c892-9816-4dbf-966c-92113fa278ac" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2034.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2034.png"/></a></figure><h2 id="3c229a73-a115-4067-a763-d30f8c752055" class="">B. Proses POS</h2><figure id="43eaa0a8-2be6-4880-8abe-2c71d38a3fb9" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2035.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2035.png"/></a></figure><figure id="7f02bffd-b068-4de6-98d8-722991121c04" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2036.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2036.png"/></a></figure><figure id="1ba835f0-5abc-459d-8806-e6494e2a9cbb" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2037.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2037.png"/></a></figure><figure id="7ac79f91-d0fa-448f-9540-6e889967723e" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2038.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2038.png"/></a></figure><figure id="490d1e4c-43e9-4fef-94c8-5a09b43d1ace" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2039.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2039.png"/></a></figure><figure id="8d608735-0fc3-4566-bd84-52927859e7e9" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2040.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2040.png"/></a></figure><h2 id="c28fb4fd-8ac1-4591-b669-d2a2a49a5180" class="">C. Proses EDC</h2><figure id="a41b6155-48dd-4886-bbfe-655c92f762e8" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2041.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2041.png"/></a></figure><figure id="5d10af27-f847-4eb9-ac40-b1bc6127988c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2042.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2042.png"/></a></figure><h1 id="9077f25f-7634-4b2d-81b0-5ef8385fe2b9" class="">Prosedur Tunai BCA</h1><p id="ec42af35-cb1d-4069-8ff5-f09e16046814" class=""><strong>Ketentuan</strong></p><figure id="11474576-fb01-422e-a176-bd6be74a6144" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2043.png"><img style="width:384px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2043.png"/></a></figure><figure id="281db6e6-c50d-4e8f-994d-23679f43e876" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2044.png"><img style="width:624px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2044.png"/></a></figure><h2 id="aaae842f-d1da-411e-9adf-952a0a25a7b6" class="">A. Proses Customer</h2><figure id="081fbbc7-f761-4b3d-9b39-13e07ed8fa73" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2045.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2045.png"/></a></figure><figure id="f721dd46-b73e-46e1-bd48-fcfd070b294b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2046.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2046.png"/></a></figure><h2 id="3159fca5-0175-4690-aced-dfd12788de2c" class="">B. Proses POS</h2><figure id="00ec938f-640e-4622-accc-8a899f7a165b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2047.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2047.png"/></a></figure><figure id="d80ea262-21c6-4c8f-944c-4501e61f878f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2048.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2048.png"/></a></figure><figure id="9708ddab-cd91-43cc-94ea-551cbf4659f9" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2049.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2049.png"/></a></figure><figure id="21a887f4-3bc3-4e94-91cb-de3c51736ef6" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2050.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2050.png"/></a></figure><figure id="f83bf444-080e-4786-bd27-ed9c131317b3" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2051.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2051.png"/></a></figure><h2 id="5c432a39-08b3-4381-b18d-3c10e8908327" class="">C. Proses EDC</h2><figure id="6a07d4d6-ad12-44c6-93b4-36d957661ab2" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2052.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2052.png"/></a></figure><figure id="a22c6c88-60b8-415f-8417-0244789674ee" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2053.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2053.png"/></a></figure><figure id="aa8454d0-d5a2-4dcb-b05f-584e9dd06218" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2054.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2054.png"/></a></figure><h1 id="cdf5ade0-ae3a-4c88-b901-8be65eb41f6f" class="">Prosedur Pembayaran dengan Kartu Kredit</h1><figure id="3d58d8df-3333-407d-bef8-0f2f367dcb79" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2055.png"><img style="width:627px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2055.png"/></a></figure><figure id="0846567e-0594-4083-83c9-54609f03390c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2056.png"><img style="width:616px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2056.png"/></a></figure><h2 id="42a60c27-e9df-4e47-982f-9318d256b8b7" class="">A. Proses Customer</h2><figure id="ef103e35-4452-4baf-bfe0-3e890dabc930" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2057.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2057.png"/></a></figure><figure id="d66b59fc-07b1-435c-b65d-7a63ced78f58" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2058.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2058.png"/></a></figure><figure id="1f02c3e2-d1f4-46e4-a67d-59128f333e91" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2059.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2059.png"/></a></figure><figure id="47c8f0e0-880b-42dc-9bb5-7c62caf8b589" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2060.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2060.png"/></a></figure><h2 id="f617a844-cef2-4c9c-b9d1-e67f3e68a937" class="">B. Proses POS</h2><figure id="9e7f096c-2697-460a-affb-5962b3160439" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2061.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2061.png"/></a></figure><figure id="4cf74e13-17e0-417d-9c90-6a843ac09a71" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2062.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2062.png"/></a></figure><h2 id="00c64005-1785-4547-af0c-17ec2fdf0974" class="">C. Proses EDC</h2><figure id="ccb26528-5f91-4dde-8798-0607ebbdd756" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2063.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2063.png"/></a></figure><figure id="0b10f435-3b76-432a-8ccd-6113cc7dc140" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2064.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2064.png"/></a></figure><figure id="bf405f5b-16b0-47db-903e-d3bcb55174e6" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2065.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2065.png"/></a></figure><figure id="bad01364-2963-4393-a3c3-96d855a7ec34" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2066.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2066.png"/></a></figure><figure id="a4f09c22-586c-48e9-9d55-c671dd11f166" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2067.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2067.png"/></a></figure><figure id="1b0711a0-579c-4984-96c5-b6714b291b30" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2068.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2068.png"/></a></figure><figure id="72f41535-e97b-48cc-87ac-5457e2c2afa5" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2069.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2069.png"/></a></figure><figure id="44f44e5d-f485-4d40-9e25-662ddce2a32a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2070.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2070.png"/></a></figure><figure id="0c74b204-76b0-49a1-9bd3-e3a8ef298d43" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2071.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2071.png"/></a></figure><figure id="367ea261-de17-4614-bc8a-af0e4e1cc31c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2072.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2072.png"/></a></figure><figure id="3d7a2e01-ecd3-4cca-947b-011d5ab587a2" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2073.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2073.png"/></a></figure><figure id="21c3f3b4-eaee-4430-840d-dc8a7b51aa0c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2074.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2074.png"/></a></figure><h1 id="4d83e75a-3712-48fa-863a-0bca8de1bd4a" class="">Prosedur Pembayaran dengan Voucher Belanja Super Indo</h1><figure id="a57fca58-0426-4f35-94f4-f3d5841d4fb8" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2075.png"><img style="width:634px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2075.png"/></a></figure><figure id="9d32456c-7405-4d56-93bf-95cd669aacb0" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2076.png"><img style="width:625px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2076.png"/></a></figure><h2 id="05fcf19b-12f7-498a-820b-63385c3279eb" class="">A. Konfirmasi Customer</h2><figure id="6f682663-7745-4038-8dcc-19e9c455e9e0" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2077.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2077.png"/></a></figure><figure id="e3151b86-dbb6-46ec-aae7-bf7c78cc5cb5" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2078.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2078.png"/></a></figure><figure id="6a486a63-cf4a-48bd-b688-e1b80af3843e" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2079.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2079.png"/></a></figure><figure id="fa502922-ff15-4716-96cc-afe37f45ff68" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2080.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2080.png"/></a></figure><figure id="8ab4d3aa-b9d8-4364-a4e6-77523f4b0fbb" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2081.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2081.png"/></a></figure><figure id="477b32a1-57f0-4e29-b2ac-9b0b9e1dc40f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2082.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2082.png"/></a></figure><figure id="d92709c5-92d4-4bed-92b3-0d3a9a53858a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2083.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2083.png"/></a></figure><figure id="c89ef34a-0527-4f04-8697-4232d1af1f0f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2084.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2084.png"/></a></figure><h2 id="cb2f1e4c-0c8b-4ce7-9839-5ede0274583d" class="">B. Proses POS</h2><figure id="6678527c-f92b-4456-97cc-4ca0315d0f45" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2085.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2085.png"/></a></figure><figure id="aad8c10f-8f5d-45bc-8114-b307bb5ba8f6" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2086.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2086.png"/></a></figure><figure id="57cf328f-bc82-4fb5-88a4-5601c7b53c0a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2087.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2087.png"/></a></figure><figure id="2702cbc8-ff4d-4aa8-978b-2835a0dbeea5" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2088.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2088.png"/></a></figure><figure id="86e661fb-e025-4621-a219-b362755dc6c8" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2089.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2089.png"/></a></figure><figure id="1759040a-8541-4cb7-93b1-d0b49653cee2" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2090.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2090.png"/></a></figure><figure id="04940b6d-0b94-4126-aca9-a8f94c04d299" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2091.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2091.png"/></a></figure><h1 id="2a43cdc9-1ae6-4838-b76c-36794d3e254f" class="">Ketentuan Penjualan dan Pembayaran Gift Card</h1><p id="50f1789e-068f-4c0d-8658-3dfecf43aa03" class=""><strong>Ketentuan</strong></p><figure id="dd10bdef-163e-4607-a01f-188a95fbc805" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2092.png"><img style="width:636px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2092.png"/></a></figure><figure id="5b8364e4-970a-4c24-8c78-4451d4792c1c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2093.png"><img style="width:622px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2093.png"/></a></figure><figure id="a5541960-ed1b-4e72-9cec-0d21cef23a58" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2094.png"><img style="width:609px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2094.png"/></a></figure><h2 id="9d0ef6b5-fcf5-43c8-ac22-4dd8be216172" class="">A. Penjualan Gift Card</h2><figure id="c24dcd8e-5445-4bbb-b3c2-269a09889dc1" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2095.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2095.png"/></a></figure><figure id="bf2fca3c-1aa8-468d-8224-925c62611dfc" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2096.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2096.png"/></a></figure><figure id="c35b38c1-1dfd-463b-9903-53cc639564ae" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2097.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2097.png"/></a></figure><figure id="7df4a5d3-35f7-416b-9be6-4d5da6a6fca3" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2098.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2098.png"/></a></figure><figure id="c6b65c9e-33b5-4a59-82e3-99fda725126f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2099.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%2099.png"/></a></figure><figure id="1112c87f-61be-4d07-9703-d40b875d52cf" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20100.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20100.png"/></a></figure><h2 id="951f0fa1-cd76-4987-a8a4-b9ea936cf421" class="">B. Aktivasi Gift Card</h2><figure id="1dc8f173-f096-4496-9294-4ab3cad91859" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20101.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20101.png"/></a></figure><figure id="bf18ed93-87bb-49c0-a98c-f1de69a09dec" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20102.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20102.png"/></a></figure><figure id="5f0a1eee-1e66-4ada-b2c8-44d569067b57" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20103.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20103.png"/></a></figure><h2 id="3488a511-c69e-4c55-9aa9-a632567ae35a" class="">C. Pembayaran Menggunakan Gift Card</h2><figure id="d7599e7b-d9e8-40cb-bb8e-726835e34494" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20104.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20104.png"/></a></figure><figure id="d5612f38-ad74-46a9-bf20-6a51505c3298" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20105.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20105.png"/></a></figure><figure id="d4fc2748-abba-4480-9f71-7ca4d1047a34" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20106.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20106.png"/></a></figure><figure id="5c71c3d5-a901-4b94-9395-15098606183f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20107.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20107.png"/></a></figure><figure id="d4acadd7-8e87-4a96-b7fe-d571e695d2cb" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20108.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20108.png"/></a></figure><figure id="77af0e50-1b56-4005-be47-958336d85bf6" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20109.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20109.png"/></a></figure><figure id="0860415f-1a0c-40f0-b13f-7ffc795b174c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20110.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20110.png"/></a></figure><h2 id="03d7cb79-da19-4c70-a33c-f9600433b091" class="">D. Lain-Lain</h2><figure id="19743472-4d31-4aca-b022-d112392d270a" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20111.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20111.png"/></a></figure><figure id="90f8a859-6832-4856-a8ae-39e9d8c2c796" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20112.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20112.png"/></a></figure><figure id="2a1e56fe-473a-4907-8d4f-ff82d592894f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20113.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20113.png"/></a></figure><figure id="560f0725-c8ff-4e3e-9090-9e1f7ea4cc59" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20114.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20114.png"/></a></figure><h1 id="174f273d-6756-4d82-9666-e525abb2f2c1" class="">Prosedur Pembayaran dengan Kartu FLAZZ BCA</h1><p id="0fa4dad1-a91a-479f-ae3e-a5d54a8f29f8" class=""><strong>Ketentuan</strong></p><figure id="7bd5e4ba-98b9-42a9-ae03-bbcab7d2493c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20115.png"><img style="width:625px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20115.png"/></a></figure><figure id="29b5df01-d382-4fb0-a22b-19d782874482" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20116.png"><img style="width:636px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20116.png"/></a></figure><figure id="8f162ae2-7dca-4b9f-a560-2bd64fa6c86c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20117.png"><img style="width:636px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20117.png"/></a></figure><h2 id="4b8c436e-bb57-4bf7-b404-dee349837b97" class="">A. Proses Customer</h2><figure id="72cf5a70-6871-43cc-9021-0f29849e0930" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20118.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20118.png"/></a></figure><h2 id="f63a70c4-ced6-4eb9-88bf-4fed8ff6fa5f" class="">B. Proses POS</h2><figure id="e42adb64-93eb-4ec8-8131-6a82c1d21633" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20119.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20119.png"/></a></figure><figure id="3b34ecb7-d5bc-480c-8f00-c0c45393a574" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20120.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20120.png"/></a></figure><h2 id="cd29a52d-b721-4221-861a-d7ebff8b4613" class="">C. Proses EDC</h2><figure id="16cb486f-f5b0-4706-b9e0-07272e88bb88" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20121.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20121.png"/></a></figure><figure id="5e87b302-f12f-4094-9cf8-aad5dcd4aace" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20122.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20122.png"/></a></figure><h2 id="1a2870e8-8b6b-404b-b7ad-2d15480a453e" class="">D. Penyelesaian Proses</h2><figure id="d62bd748-224b-4b83-867c-6afc051afa8b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20123.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20123.png"/></a></figure><h1 id="cdd83932-c87b-4287-8619-78b7ec93baec" class="">Prosedur Pembayaran dengan E-Money</h1><figure id="fb17c5e2-36dc-46e0-9c47-648a9902cf27" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20124.png"><img style="width:641px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20124.png"/></a></figure><figure id="677a2100-6b45-48de-96f8-45b60e70b41b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20125.png"><img style="width:650px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20125.png"/></a></figure><figure id="70b75ab8-86f2-4111-bcd4-14f1e65d21a3" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20126.png"><img style="width:610px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20126.png"/></a></figure><figure id="7eb43364-a6be-4d35-aa79-3d8334cfe682" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20127.png"><img style="width:628px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20127.png"/></a></figure><h2 id="6d02a861-e65c-4e26-b36b-d7947b4f3c2e" class="">A. Proses Customer</h2><figure id="7eb3d582-f5fc-4502-830d-e166b90303c8" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20128.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20128.png"/></a></figure><h2 id="73caac5b-9c4a-48df-929c-4beaab6e5bc1" class="">B. Proses POS</h2><figure id="0e59967e-7ddf-4554-a2cd-9007623b8927" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20129.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20129.png"/></a></figure><figure id="54f98f28-8dcf-4611-8aa1-1d32f98d6536" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20130.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20130.png"/></a></figure><h2 id="18f38238-b04f-4df5-8f65-665acf7d98d9" class="">C. Proses EDC</h2><ol type="1" id="e150c163-5cbb-44e5-be4c-5a37a078360d" class="numbered-list" start="4"><li>Cashier: Melakukan Otorisasi pada EDC Mandiri</li></ol><figure id="6ff821f3-5e2c-4c9a-89c5-4843fea57707" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20131.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20131.png"/></a></figure><h2 id="bdf010a2-8109-43bd-9ba3-2e49962b4ea7" class="">D. Penyelesaian Proses</h2><figure id="e40d4a14-bce6-484c-8605-08463b7dce98" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20132.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20132.png"/></a></figure><h1 id="f27b1487-1d76-4bc2-bf24-211ca1c7f18e" class="">Prosedur ALP (Associates Loyalty Program)</h1><figure id="f8ad2a26-a369-4dc9-a3ed-65ddf13adef6" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20133.png"><img style="width:617px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20133.png"/></a></figure><figure id="8ef74969-a61b-43c6-94c9-39b0f959c4cf" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20134.png"><img style="width:639px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20134.png"/></a></figure><figure id="2326cc9b-2f5a-4043-b47e-7cb659a47cf7" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20135.png"><img style="width:621px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20135.png"/></a></figure><h2 id="eaf69a1f-6d66-4b90-b1fc-a7cd8195d149" class="">A. Transaksi dengan ALP</h2><figure id="aadceb88-13da-473d-89fa-39918db07673" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20136.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20136.png"/></a></figure><figure id="91cad91e-20fd-4e9f-b040-a725da628971" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20137.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20137.png"/></a></figure><figure id="3d38048c-3c52-4d3c-85d6-41a2515a2b5c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20138.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20138.png"/></a></figure><figure id="2f6dceb2-d238-4a87-a3c0-a5d8f42be68c" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20139.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20139.png"/></a></figure><figure id="ff9866f2-6d5e-4480-aa1a-58ca5e7a4aee" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20140.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20140.png"/></a></figure><figure id="243d4e7a-8ed5-4466-b7b8-411914e8d3b4" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20141.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20141.png"/></a></figure><figure id="f7244506-da61-4297-b9df-c558ed26bfeb" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20142.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20142.png"/></a></figure><figure id="bed523a6-5059-4317-8e82-a3f6612b63c6" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20143.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20143.png"/></a></figure><figure id="77dc49c6-53ca-4c4a-91a7-ce2172135374" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20144.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20144.png"/></a></figure><figure id="a59285b5-ab69-42e1-ad3a-2df8a98a1826" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20145.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20145.png"/></a></figure><h2 id="01cd2180-1dc3-4aca-9520-01ef83d42594" class="">B. Pembatalan ALP</h2><figure id="7f2a8a53-099a-48b7-9433-f4f7339fc5b8" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20146.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20146.png"/></a></figure><figure id="223bec44-10d9-461f-8294-2a06711b49fd" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20147.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20147.png"/></a></figure><figure id="9eba215c-8d80-4289-8bb6-86fac89a518f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20148.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20148.png"/></a></figure><figure id="253665dd-36c4-4812-bd46-a9f428110409" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20149.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20149.png"/></a></figure><figure id="dfe829c9-82fe-409b-a02d-5431facb2b9f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20150.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20150.png"/></a></figure><figure id="e4811ecf-e44a-4e7b-bea5-dfde1102347e" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20151.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20151.png"/></a></figure><figure id="2ac6ab77-1658-4abb-aa4e-efbc6616820b" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20152.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20152.png"/></a></figure><figure id="90bdea7d-6b24-48ca-ba74-e1a6407b9ba4" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20153.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20153.png"/></a></figure><h1 id="0766ec20-455f-4a08-8f68-173ee9ca8d1e" class="">Quiz</h1><figure id="bffa8491-488b-4697-9fa4-82c09ff41b0f" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20154.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20154.png"/></a></figure><figure id="632168e2-473c-4166-aa2b-d6e4c4bf4029" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20155.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20155.png"/></a></figure><figure id="a5646390-28f1-4120-831d-33f9b1259882" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20156.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20156.png"/></a></figure><figure id="84d6ab08-b46a-438c-97da-1f317bed63ef" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20157.png"><img style="width:708px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20157.png"/></a></figure><figure id="b38d3f0c-83f4-4693-a060-4900ddccb8ea" class="image"><a href="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20158.png"><img style="width:1158px" src="Transaksi%20Pembayaran%207d10f775078347afa14f213704ee8a2a/Untitled%20158.png"/></a></figure><p id="4c7e700d-38e6-4bee-be79-da8c86f9ac2f" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

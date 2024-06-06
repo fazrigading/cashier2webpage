@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Transaksi Penjualan</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4d4ef571-cf58-4bda-98a1-a0a272b5a453" class="page sans"><header><h1 class="page-title">Transaksi Penjualan</h1><p class="page-description"></p></header><div class="page-body"><nav id="70be7fa4-bb48-45ac-b13f-32b7f58f7c37" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cfee3227-84b8-4f34-9ee7-fedb6d8950fc">1. Prosedur Transaksi Penjualan</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#72da29bb-3d6e-4190-bb14-cf75152fd731">2. Prosedur Penjualan 2</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0c2358ac-6a7e-4002-a264-b48e2903db2e">3. Prosedur Batal Transaksi</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#09a4f4f6-2572-4864-ad0d-3690c0b4422d">4. Prosedur Void</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c37b3ec6-1b05-41ab-9054-e0c61fff2f50">5. Prosedur Refund</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#738783bc-b6d0-4569-b05c-bc649e807656">KETENTUAN REFUND </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9c473c32-0d78-4b36-b819-19f669699cd1">REFUND BARANG</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2f98e2a9-cf7a-4053-bacf-0c738bb68f35">REFUND UANG </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#07c69e49-a13d-4dbc-894e-8e543845e50d">1. Cashier: Melayani Customer yang akan Refund</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bace5a59-25f5-4470-b370-b3c80e29e3e1">2. Cashier: Menginformasikan kepada CTL dan MOD</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b16c35c8-175c-40d5-81e7-90d1d1bd583c">3. MOD: Melakukan Proses Refund</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#df687f94-849f-4f63-969c-98cef106e8f2">4. MOD: Melakukan Refund Uang</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#872a4f09-77ef-414e-9f9a-588d7d28dbef">5. Cashier: Mempersilakan Customer Mencari Barang Pengganti</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e2fd73ea-1d8d-41c1-a464-1451804b592c">6. Cashier: Melakukan Proses Refund Barang</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#31c738c7-a790-4a90-b14c-d09a43550046">6. Prosedur Ubah Harga</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3a846008-5b62-4a24-abd1-d7b72784732c">1. Cashier: Meminta Maaf ke Customer karena Perbedaan Harga </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9823becd-99d1-43db-a18c-2c5ae4d43c7d">2. Cashier: Menginformasikan ke CTL dan MOD Bahwa Terjadi Perbedaan Harga</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0c4cd46a-7802-49a3-b249-44ce81f760b4">3. MOD: Melakukan Ubah Harga pada POS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b1119887-87a1-475a-a342-6d82415544f4">4. Cashier: Menjelaskan ke Customer bahwa Harga Telah Diubah</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ee24d778-f6e6-46b1-9eda-25e6f731f2d7">5. CTL: Mencetak Laporan Ubah Harga</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e82be5c1-ec43-4855-a235-324836bdf5c5">Quiz</a></div></nav><figure id="97fa5e98-6200-43ef-9b82-8fbf608502b0" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled.png"/></a></figure><h1 id="cfee3227-84b8-4f34-9ee7-fedb6d8950fc" class="">1. Prosedur Transaksi Penjualan</h1><p id="78938cf1-96f6-4e2e-999b-24bda635f1f9" class="">Ketentuan Transaksi Penjualan</p><ol type="1" id="da609df0-e6d4-44b9-9d1d-48d310e674c3" class="numbered-list" start="1"><li>Transaksi penjualan dilakukan dengan menggunakan cash register.</li></ol><ol type="1" id="709d6159-90f9-413e-a244-0e8f70e69558" class="numbered-list" start="2"><li>Penginputan barang pada menu penjualan dapat dilakukan dengan scan barang, input PLU, atau ketik barcode.<ol type="a" id="2885c4c3-d732-430a-9ab3-1082c37ab96d" class="numbered-list" start="1"><li>Penginputan barang dilakukan dengan cepat dan teliti.</li></ol><ol type="a" id="2409dd69-4fef-4c15-b963-67a88f8f1444" class="numbered-list" start="2"><li>Pastikan deskripsi barang yang muncul pada monitor sama dengan fisik barang.</li></ol></li></ol><ol type="1" id="95bc8e06-8e2f-48dd-926c-18b9b43bd27d" class="numbered-list" start="3"><li>Cashier harus menggunakan ID dan passwordnya masing-masing untuk melakukan transaksi. Contoh: ketika CTL/MOD membuka transaksi, maka transaksi tersebut tidak boleh digunakan oleh Cashier.</li></ol><p id="f7037fd3-d1ce-48d3-a925-49e129f69004" class="">Berikut gambar dan fungsi keyoard POS di Cashier.</p><figure id="e9358e3f-3bed-4318-a423-96863e272937" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%201.png"><img style="width:1286px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%201.png"/></a></figure><figure id="a05cd1ee-7a1d-409a-a2fe-969577e52e22" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%202.png"><img style="width:1286px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%202.png"/></a></figure><figure id="9df62be9-576f-4d7f-8567-48b99ce9afee" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%203.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%203.png"/></a></figure><figure id="aade53f1-d262-43d2-acf9-aa5a4f770ba7" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%204.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%204.png"/></a></figure><figure id="6b4c3766-43c3-4dee-9441-db1ff756e48e" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%205.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%205.png"/></a></figure><figure id="1b2bbb6a-5a8a-45a3-98f1-d91754392216" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%206.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%206.png"/></a></figure><figure id="7bf1dadd-f454-42cc-ab00-9ff81b5c775f" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%207.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%207.png"/></a></figure><figure id="46c1d6eb-b72d-481b-b1ca-c2d527003afb" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%208.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%208.png"/></a></figure><figure id="47c3e09b-33ad-40c0-aef8-b906653bde66" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%209.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%209.png"/></a></figure><figure id="4b9ed629-0c35-4b88-8d17-bc2414a5a3e2" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2010.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2010.png"/></a></figure><figure id="c7159f2d-8bc7-4d78-8c64-87d07f9c6c26" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2011.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2011.png"/></a></figure><figure id="6aa1f292-1575-41ff-9c80-d674f1c5ff00" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2012.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2012.png"/></a></figure><figure id="248f9035-6135-40c3-bb9c-8d0ce07d4b21" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2013.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2013.png"/></a></figure><figure id="a4ffb8f8-887c-4ae3-8c43-2e7bb491a4ea" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2014.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2014.png"/></a></figure><figure id="1701d40f-9358-4c9f-b9a4-7d42b06533a1" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2015.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2015.png"/></a></figure><figure id="1937cb2c-7927-40b4-b682-ef1b2dfccc50" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2016.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2016.png"/></a></figure><h1 id="72da29bb-3d6e-4190-bb14-cf75152fd731" class="">2. Prosedur Penjualan 2</h1><p id="96c3fe65-2701-4c35-824c-801fcc0efec9" class=""><strong>Ketentuan</strong></p><ol type="1" id="9d5f1a28-1b78-40e9-b1c3-d78d8996da03" class="numbered-list" start="1"><li>Penjualan 2 dilakukan jika transaksi penjualan sebelumnya mengalami kendala, sehingga transaksi pembayaran terhambat (misal: customer ingin menambah barang, kartu kredit bermasalah, dan lain-lain). Cashier dapat melayani customer berikutnya dengan menggunakan Penjualan 2.</li></ol><ol type="1" id="b0886349-d315-418b-b65a-b0c67de6f641" class="numbered-list" start="2"><li>Penjualan 2 dilakukan oleh Cashier agar customer berikutnya tidak lama menunggu di antrian.</li></ol><ol type="1" id="cfdedf91-2e03-4fe3-a5bd-294297c6bfa2" class="numbered-list" start="3"><li>Transaksi Penjualan 2 harus diselesaikan terlebih dahulu jika ingin melanjutkan ke transaksi penjualan sebelumnya (penjualan ke-1).</li></ol><figure id="3b0c42db-1706-4c05-b9ff-df75211f401d" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2017.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2017.png"/></a></figure><figure id="6da5a235-6a24-4c8e-a06b-2a9337b04490" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2018.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2018.png"/></a></figure><figure id="190e6a9d-5b88-4185-8f77-c3a7d3af61c5" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2019.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2019.png"/></a></figure><figure id="300ea78a-9ea8-4b50-b96a-e4d6df1b2470" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2020.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2020.png"/></a></figure><figure id="2ce9efe1-ab0b-493d-9449-d85decada0ae" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2021.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2021.png"/></a></figure><figure id="4ccdbb57-ebcb-4fbf-a536-2b4983f5e76b" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2022.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2022.png"/></a></figure><figure id="f8439895-07e1-4d72-abfb-c158b489707c" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2023.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2023.png"/></a></figure><h1 id="0c2358ac-6a7e-4002-a264-b48e2903db2e" class="">3. Prosedur Batal Transaksi</h1><figure id="39806d59-5b04-4107-a4e6-b563a427933e" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2024.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2024.png"/></a></figure><ul id="8fd4e74e-0ed9-46b6-85d1-5dc8e2d3f696" class="bulleted-list"><li style="list-style-type:disc">Batal transaksi dilakukan jika ingin membatalkan seluruh item barang yang telah diinput dalam satu transaksi dan struk transaksi sudah tercetak.</li></ul><ul id="855b2cfc-df1b-4bcf-b6ce-6bc8ebc123b0" class="bulleted-list"><li style="list-style-type:disc">Penyebab batal transaksi: <ul id="4c5b0293-0c68-4e5a-bdc3-2ed9a1a117d0" class="bulleted-list"><li style="list-style-type:circle">Simulasi transaksi program promosi; </li></ul><ul id="a01dfc29-0eaa-408e-b1f1-dbb6b23977f0" class="bulleted-list"><li style="list-style-type:circle">Kartu kredit / debit customer ditolak sehingga pembayaran tidak dapat dilakukan dan customer tidak membawa uang tunai. </li></ul><ul id="2e912d7e-0988-41f0-b2a4-add12e251ffd" class="bulleted-list"><li style="list-style-type:circle">Batal transaksi hanya dapat dilakukan sebelum proses reset pada station yang sama. </li></ul></li></ul><ul id="e6aa0adb-76db-4ba1-82a7-5205605664e3" class="bulleted-list"><li style="list-style-type:disc">Batal transaksi dilakukan dengan otorisasi MOD. </li></ul><ul id="8f84b269-e837-4d6b-8479-57c4bb3afcc6" class="bulleted-list"><li style="list-style-type:disc">Batal transaksi tidak boleh dilakukan apabila pembayaran menggunakan voucher belanja Super Indo atau Gift Card </li></ul><ul id="167fce8c-a65b-4db7-aa36-94a2bf362f54" class="bulleted-list"><li style="list-style-type:disc">Pastikan fisik barang sesuai dengan struk belanja yang akan dibatalkan.</li></ul><p id="1f82e9ca-b030-4609-8749-cbc1edf33f95" class="">
+</p><figure id="e5a06cb0-1275-4f66-8f7e-fdfbfca2e375" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2025.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2025.png"/></a></figure><figure id="de5bbfed-1c8b-4593-9235-0b8173ca4002" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2026.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2026.png"/></a></figure><p id="6700bc44-fbb9-40fc-b688-48211e0ec8de" class="">MOD: Melakukan Batal Transaksi pada POS<br/>3.1. Transaksi yang akan dibatalkan diselesaikan terlebih dahulu sampai dengan menu pembayaran dan tercetak struk belanja (pembayaran tunai).<br/>3.2. Tekan tombol BATAL pada keyboard atau pada monitor, maka akan tampil permintaan untuk memasukkan kode staf dan password MOD.<br/></p><figure id="b7351197-39cb-40bf-bee1-51a6dd9063af" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2027.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2027.png"/></a></figure><p id="c6f3ac74-f0b1-4ece-ab36-ac755162cdc5" class="">3.3. Setelah memasukkan kode staf dan password MOD, maka akan tampil permintaan untuk memasukkan nomor transaksi. <strong>Input nomor transaksi </strong>yang terdapat pada struk belanja yang akan dibatalkan.</p><figure id="55c5dee4-57d1-490d-b868-79f0ac56dda8" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2028.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2028.png"/></a></figure><figure id="a49bc08d-b84b-45fb-8902-a1f265d9b73c" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2029.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2029.png"/></a></figure><figure id="d2a0f44c-c83e-427c-b887-b4ec34ef6a8b" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2030.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2030.png"/></a></figure><figure id="2e1954dc-cc61-4120-9b2d-4d4316a4626f" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2031.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2031.png"/></a></figure><h1 id="09a4f4f6-2572-4864-ad0d-3690c0b4422d" class="">4. Prosedur Void</h1><p id="be695b66-430c-4368-aef9-7f9bc510405e" class="">Ketentuan:</p><ol type="1" id="e9d092a3-a886-46a0-bb51-28647893dc41" class="numbered-list" start="1"><li>Void dilakukan pada saat transaksi penjualan masih berlangsung atau belum dilakukan proses pembayaran. </li></ol><ol type="1" id="66b0cb47-be32-43c0-a5c2-a1ed897f8a16" class="numbered-list" start="2"><li>Void dilakukan jika terjadi kesalahan input oleh Cashier atau atas permintaan customer untuk mengurangi atau membatalkan barang yang sudah diinput. </li></ol><ol type="1" id="5b3baf8f-8df9-46e7-9833-a197c9db13a0" class="numbered-list" start="3"><li>Hindari adanya kesalahan input yang mengakibatkan adanya proses void, kecuali atas permintaan customer. </li></ol><ol type="1" id="a96f4d86-e0db-4726-8b62-473140a3e842" class="numbered-list" start="4"><li>Cashier tidak berhak melakukan void, melainkan <strong>Cashier Team Leader</strong> dan <strong>Manager On Duty</strong> yang berhak melakukan void.</li></ol><figure id="22ba1da2-8771-4d69-a8bd-141b8c0dce4a" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2032.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2032.png"/></a></figure><figure id="22535382-8f1f-4113-9780-c2b6ef9dbff7" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2033.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2033.png"/></a></figure><figure id="396a0d77-4ae6-4651-9988-9f31d11ed597" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2034.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2034.png"/></a></figure><figure id="dbf96d1d-05e6-435d-8a55-8f1e568b0f43" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2035.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2035.png"/></a></figure><figure id="3fc8cf04-afad-4947-a490-c641e88e1d6d" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2036.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2036.png"/></a></figure><figure id="51b8f7ad-97c8-4105-a20a-0d3dc2db035b" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2037.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2037.png"/></a></figure><h1 id="c37b3ec6-1b05-41ab-9054-e0c61fff2f50" class="">5. Prosedur Refund</h1><figure id="c5a231f1-9178-45d0-acbb-9fbcb63fa613" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2038.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2038.png"/></a></figure><h2 id="738783bc-b6d0-4569-b05c-bc649e807656" class="">KETENTUAN REFUND </h2><ul id="446405ba-6884-48fd-9265-29d045e638b8" class="bulleted-list"><li style="list-style-type:disc">Refund adalah pengembalian barang yang sudah dibeli Oleh customer. </li></ul><ul id="080bd046-6089-4307-b852-3c28f49e5237" class="bulleted-list"><li style="list-style-type:disc">Refund dilakukan oleh MOD. Jika terjadi komplain karena ada kesalahan transaksi, laporkan dan minta MOD untuk menyelesaikan permasalahan tersebut. </li></ul><h3 id="9c473c32-0d78-4b36-b819-19f669699cd1" class="">REFUND BARANG</h3><p id="f7c996c3-7bfa-47ff-a873-90c1dc82b187" class="">Barang yang sudah dibeli oleh customer dikembalikan dan ditukar dengan barang lain (salah membeli barang). Refund barang dilakukan, jika:</p><ul id="78b473a1-601d-472b-8885-403e6c904871" class="bulleted-list"><li style="list-style-type:disc">Ada struk pembelian dan produk yang ingin ditukar. </li></ul><ul id="a5edc301-8485-48d3-a432-c3010feea17c" class="bulleted-list"><li style="list-style-type:disc">Harga barang pengganti nilainya harus sama atau lebih mahal dari barang yang dikembalikan. </li></ul><h3 id="2f98e2a9-cf7a-4053-bacf-0c738bb68f35" class="">REFUND UANG </h3><p id="60c58621-6b67-446a-a3e5-012c94db98fa" class="">Customer tidak jadi membeli barang karena sesuatu hal dan meminta uangnya kembali.</p><p id="6bc8a322-07e7-48ed-92b7-d81c21b52c76" class="">Refund uang dilakukan, jika:</p><ul id="980f1cdd-96c8-4176-adfd-a5742ab90414" class="bulleted-list"><li style="list-style-type:disc">Cashier salah input jumlah/PLU barang yang dibeli customer. </li></ul><ul id="ea762e2d-6a6b-48d1-a93d-c3067037e9e1" class="bulleted-list"><li style="list-style-type:disc">Barang yang dibeli customer rusak/kualitas barang tidak sesuai yang dijanjikan karena kesalahan produk/toko (contoh: durian bantet). </li></ul><ul id="fac79671-2c5b-4d7e-ad7e-b92ead3e64a5" class="bulleted-list"><li style="list-style-type:disc">Terdapat kesalahan toko dan customer menolak mengganti barang lain (perbedaan harga label dengan POS).</li></ul><h2 id="07c69e49-a13d-4dbc-894e-8e543845e50d" class="">1. Cashier: Melayani Customer yang akan Refund</h2><ol type="1" id="f1082d2b-7213-4147-8d52-a7b9fb6a60d8" class="numbered-list" start="1"><li>Menanyakan dengan sopan alasan ingin melakukan refund.</li></ol><ol type="1" id="3437cbce-4d03-4a13-abfb-3477fe1799f6" class="numbered-list" start="2"><li>Meminta struk pembelian.</li></ol><ol type="1" id="7586a4bb-3d92-4bcd-843b-1808793113fd" class="numbered-list" start="3"><li>Memeriksa kondisi barang dan memastikan bahwa barang tersebut tercantum dalam struk belanja.</li></ol><ol type="1" id="be4b6f0c-e9fc-427a-9a24-734b0ef9a735" class="numbered-list" start="4"><li>Meminta maaf kepada customer jika ternyata refund karena kesalahan Cashier atau toko.</li></ol><ol type="1" id="a24f3c20-bf22-4124-8aea-87d41c4cf9ce" class="numbered-list" start="5"><li>Meminta customer untuk menunggu proses refund yang akan dilakukan Oleh MOD.</li></ol><h2 id="bace5a59-25f5-4470-b370-b3c80e29e3e1" class="">2. Cashier: Menginformasikan kepada CTL dan MOD</h2><ol type="1" id="f5512f20-b021-4258-94c2-eac99ba156ff" class="numbered-list" start="1"><li>Informasikan alasan refund</li></ol><ol type="1" id="6d2bf8d2-233f-43f5-a567-36b89ada28d5" class="numbered-list" start="2"><li>Informasikan barang yang akan di-refund beserta struk belanja dari customer</li></ol><h2 id="b16c35c8-175c-40d5-81e7-90d1d1bd583c" class="">3. MOD: Melakukan Proses Refund</h2><figure id="38d809be-bd9f-43f7-a831-a6d54ff75c7e" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2039.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2039.png"/></a></figure><figure id="c83c1aa7-79a8-4f62-8d97-d82fe453fcc1" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2040.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2040.png"/></a></figure><figure id="91154840-e57b-4673-a073-50ceb8e2d9c8" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2041.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2041.png"/></a></figure><figure id="2f686b18-f39a-4bd8-aabd-85f90570d7e5" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2042.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2042.png"/></a></figure><figure id="c8da1263-ade0-484a-9cf7-ec8985dfb1e2" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2043.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2043.png"/></a></figure><h2 id="df687f94-849f-4f63-969c-98cef106e8f2" class="">4. MOD: Melakukan Refund Uang</h2><figure id="b5d639c0-8c58-46a9-a9d3-03a53dce619e" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2044.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2044.png"/></a></figure><figure id="7765624e-5fb7-4fef-b237-ea7d180d7a45" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2045.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2045.png"/></a></figure><figure id="92963f9a-0e14-47e0-bfd7-bb2d28fd37a1" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2046.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2046.png"/></a></figure><figure id="f31be421-8af4-4dd2-9986-eddce66e8e22" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2047.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2047.png"/></a></figure><figure id="6c5faffc-d414-4f76-99bb-ee2266864ef3" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2048.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2048.png"/></a></figure><h2 id="872a4f09-77ef-414e-9f9a-588d7d28dbef" class="">5. Cashier: Mempersilakan Customer Mencari Barang Pengganti</h2><figure id="4ad96506-7421-4ce4-ae4e-3e4e9f95383c" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2049.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2049.png"/></a></figure><h2 id="e2fd73ea-1d8d-41c1-a464-1451804b592c" class="">6. Cashier: Melakukan Proses Refund Barang</h2><figure id="d513480e-c6f8-4a2e-855b-99af665ccd84" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2050.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2050.png"/></a></figure><figure id="14b85cbd-7cc0-441f-9ee2-f1980b240f0c" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2051.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2051.png"/></a></figure><figure id="580fac34-1c89-4375-84a5-f807587d6cd9" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2052.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2052.png"/></a></figure><figure id="8437e2ef-2ed5-4adf-a00c-09c461a541bd" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2053.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2053.png"/></a></figure><figure id="46241c11-ad71-4831-ab2b-e914dcd3526a" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2054.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2054.png"/></a></figure><h1 id="31c738c7-a790-4a90-b14c-d09a43550046" class="">6. Prosedur Ubah Harga</h1><p id="2921d415-0ea7-4e20-9da9-33cfaee66ca9" class=""><strong>Ketentuan</strong></p><ol type="1" id="3d367db0-1cf5-4098-ab9b-c747d60724d3" class="numbered-list" start="1"><li>Ubah harga dilakukan jika terjadi perbedaan harga antara harga yang tertera di pajangan dengan harga pada POS dan mengacu pada harga terendah.</li></ol><ol type="1" id="10b5b057-7982-4759-93b4-d065d19f7d58" class="numbered-list" start="2"><li>Ubah harga dilakukan Oleh MOD.</li></ol><ol type="1" id="939052be-fbe9-46fd-9439-5f464738c0f3" class="numbered-list" start="3"><li><strong>Laporan rekap reset </strong>harus dicetak dan ditandatangani oleh Cashier Team Leader dan diperiksa MOD (Lihat: Prosedur Reset dan Sign Off).</li></ol><ol type="1" id="b94a6ecb-bf2d-43c6-ae22-b7d7d39a1afb" class="numbered-list" start="4"><li>Apabila ada perubahan harga yang tercantum pada <strong>Laporan rekap reset</strong>, maka <strong>Laporan ubah harga</strong> harus dicetak dan diberikan keterangan alasan dilakukan ubah harga beserta tanda tangan MOD.</li></ol><ol type="1" id="d1351b67-df27-4190-be13-d22a8031852d" class="numbered-list" start="5"><li>Laporan ubah harga disimpan di odner di ruang Cashier Team Leader.</li></ol><h2 id="3a846008-5b62-4a24-abd1-d7b72784732c" class="">1. Cashier: Meminta Maaf ke Customer karena Perbedaan Harga </h2><figure id="d0cdab00-8876-4109-865b-2a05b2257521" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2055.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2055.png"/></a></figure><h2 id="9823becd-99d1-43db-a18c-2c5ae4d43c7d" class="">2. Cashier: Menginformasikan ke CTL dan MOD Bahwa Terjadi Perbedaan Harga</h2><figure id="ef0109f7-82c5-43e1-8bac-e13015dc7fe9" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2056.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2056.png"/></a></figure><h2 id="0c4cd46a-7802-49a3-b249-44ce81f760b4" class="">3. MOD: Melakukan Ubah Harga pada POS</h2><figure id="b3a1809f-b242-47ae-9d58-f8b1286aa931" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2057.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2057.png"/></a></figure><figure id="233443b1-d1ce-44ed-ab52-a84337e6d744" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2058.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2058.png"/></a></figure><figure id="c2175193-7ff5-4f4b-8c89-be6be4774bd4" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2059.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2059.png"/></a></figure><h2 id="b1119887-87a1-475a-a342-6d82415544f4" class="">4. Cashier: Menjelaskan ke Customer bahwa Harga Telah Diubah</h2><figure id="0acbda66-713f-438b-9527-bd6140a7c1c4" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2060.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2060.png"/></a></figure><h2 id="ee24d778-f6e6-46b1-9eda-25e6f731f2d7" class="">5. CTL: Mencetak Laporan Ubah Harga</h2><figure id="4a996a0b-b3d0-42c8-b821-bbc53fcc581c" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2061.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2061.png"/></a></figure><figure id="c202fff5-3b24-4eec-b3e7-8d6ba17f0f7f" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2062.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2062.png"/></a></figure><h1 id="e82be5c1-ec43-4855-a235-324836bdf5c5" class="">Quiz</h1><figure id="980998cd-38c2-4377-877b-04af7da535f4" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2063.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2063.png"/></a></figure><figure id="e22455e6-a046-4cf4-82a6-a24b1bb2e7b3" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2064.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2064.png"/></a></figure><figure id="b9912290-45bb-4cc4-a456-76da63f6dd4c" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2065.png"><img style="width:708px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2065.png"/></a></figure><figure id="5641d818-39f7-4ad1-8593-be102a788c20" class="image"><a href="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2066.png"><img style="width:1410px" src="Transaksi%20Penjualan%204d4ef571cf584bda98a1a0a272b5a453/Untitled%2066.png"/></a></figure><p id="4acba6ff-bacc-464d-a441-c8c1ed8a513c" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

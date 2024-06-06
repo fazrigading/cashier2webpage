@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Transaksi PWP, Voucher, dan E-Money</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="91bb3896-a473-476f-a8a9-6c592c288147" class="page sans"><header><h1 class="page-title">Transaksi PWP, Voucher, dan E-Money</h1><p class="page-description"></p></header><div class="page-body"><p id="1d2a6285-289b-4d38-9092-85568bc77714" class="">Modul ini berisi SOP:</p><ul id="5ec99aff-e5ae-4f60-9057-786dcb5b19cf" class="bulleted-list"><li style="list-style-type:disc">Transaksi Penjualan PWP</li></ul><ul id="1c0bd6e4-64d2-407e-9d9e-fb0c15c566be" class="bulleted-list"><li style="list-style-type:disc">Transaksi Penjualan Voucher Elektrik</li></ul><ul id="32b24537-5dc4-4f37-838c-920d6f351a22" class="bulleted-list"><li style="list-style-type:disc">Penjualan Voucher Super Indo</li></ul><ul id="983c7ac4-9831-40e3-851a-d99863e71105" class="bulleted-list"><li style="list-style-type:disc">Penjualan Dan Top Up Kartu Flazz (Co Brand)</li></ul><ul id="7d7176a2-836b-4a35-bf07-73585fd88ab0" class="bulleted-list"><li style="list-style-type:disc">Penjualan, Top Up Dengan Kartu E-Money</li></ul><p id="d3519327-2442-4649-a166-4c9d582b8824" class="">
+</p><figure id="2b94fe2f-afea-48ec-974e-e6cd2342c8e7" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled.png"><img style="width:445px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled.png"/></a></figure><h1 id="aa6f3530-92f9-4aca-9ad0-3f8e105b764a" class="">Prosedur Transaksi Penjualan PWP</h1><figure id="a9564ae0-8174-44c8-995d-ccbcbc141dce" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%201.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%201.png"/></a></figure><figure id="f7648901-0599-49ab-bbd8-e1d138a2f3e1" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%202.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%202.png"/></a></figure><h1 id="f6a01d9e-fcd4-4cfb-b6e0-2b2dac3b07e9" class="">Ketentuan Transaksi Penjualan Voucher Elektrik</h1><figure id="034baaa3-f7f3-4054-ba30-aa8b069715a7" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%203.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%203.png"/></a></figure><h2 id="7aeabdb0-73b5-4269-8fa6-b3278c30726b" class="">Proses Transaksi</h2><figure id="3bf598ec-3d4b-4d7e-99c4-965ceb3ff9f6" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%204.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%204.png"/></a></figure><figure id="1ba371be-9a4e-4d61-8510-89839701ac6c" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%205.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%205.png"/></a></figure><figure id="dafabbcb-b43d-4797-b8ab-26e2e071eebd" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%206.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%206.png"/></a></figure><figure id="4c97cd6b-9920-4b34-8098-241c9d306522" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%207.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%207.png"/></a></figure><figure id="3b94c592-6880-4404-a698-14f9fc296f5f" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%208.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%208.png"/></a></figure><figure id="1f54f3d3-6c67-453c-a767-795b1db87a87" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%209.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%209.png"/></a></figure><figure id="56b49f21-27b0-410a-9b9b-3cebfdf7afde" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2010.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2010.png"/></a></figure><h2 id="b7a8527e-9ab0-4ab2-981c-6f1abc079849" class="">Langkah-Langkah Apabila Transaksi Suspect</h2><figure id="7dd523ff-e2f8-446f-8ef3-b6de79e94bfa" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2011.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2011.png"/></a></figure><figure id="ef7c2d90-c18f-4a68-9d8c-e4756fbc0153" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2012.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2012.png"/></a></figure><figure id="621ae00d-2ae7-413f-a7f8-ca19c08e78ff" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2013.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2013.png"/></a></figure><h1 id="e60eb421-0861-4fe7-957a-3766efd22b06" class="">Penjualan Voucher</h1><h2 id="fe406ca2-ed09-4180-ab74-f50a8a2c449d" class="">Jenis Voucher</h2><figure id="d7bd38dc-d1fb-47f6-ba00-07d2e0f9da6a" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2014.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2014.png"/></a></figure><figure id="a8058872-07a9-496d-890b-143f08b8468b" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2015.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2015.png"/></a></figure><figure id="49a9f75e-e69e-4c2f-b4e6-2f57dfe6a151" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2016.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2016.png"/></a></figure><h2 id="28090187-c8ef-4123-82fe-90927b7f459c" class="">Pembayaran</h2><figure id="0693a6cd-fcf3-44d4-91f0-de12d51ff1e0" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2017.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2017.png"/></a></figure><figure id="a541df08-1fae-473b-abe2-206ed23021c8" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2018.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2018.png"/></a></figure><figure id="ba857382-f9dc-48ca-b994-eba31115da5a" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2019.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2019.png"/></a></figure><figure id="426eb096-ad57-4918-9ad4-15bef19482a6" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2020.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2020.png"/></a></figure><h2 id="0202a6e0-c6c1-4929-a6f8-fb6b037aac7f" class="">Pembayaran dengan Tunai</h2><figure id="3553377e-77d2-4445-bd42-3cd5e56050e0" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2021.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2021.png"/></a></figure><figure id="7a0b1736-ee45-4a5e-82ca-9bb5c05e2684" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2022.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2022.png"/></a></figure><figure id="3c1af6a6-3e6c-4758-a4c6-c44ecc478dd8" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2023.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2023.png"/></a></figure><figure id="2e1c0ca1-8fc2-4b52-a535-2144033ed389" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2024.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2024.png"/></a></figure><figure id="5f094cea-dc30-4883-a6fe-1cc63479a228" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2025.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2025.png"/></a></figure><figure id="6319eda8-cd1d-4e16-841e-1618f8ce4aef" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2026.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2026.png"/></a></figure><figure id="0c9184fc-5f05-4685-adf2-2f173e96d3de" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2027.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2027.png"/></a></figure><h2 id="40535d2c-a255-4e8a-b653-cf66944eed7d" class="">Pembayaran dengan Transfer</h2><figure id="75c7a51b-a666-40e8-9cfa-c26e9c3d9025" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2028.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2028.png"/></a></figure><figure id="2c2246df-8125-4558-810b-7f4a2115bc66" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2029.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2029.png"/></a></figure><figure id="8c7e6074-a271-4a86-b6c9-4f2a4864b8f9" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2030.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2030.png"/></a></figure><figure id="697a24bc-b7da-47f2-9a6d-bd44ada89f11" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2031.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2031.png"/></a></figure><figure id="3725b16c-d185-4e2f-8e76-599cd90d725a" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2032.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2032.png"/></a></figure><figure id="64e02f85-566d-4f4f-864b-39be0f39afd8" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2033.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2033.png"/></a></figure><figure id="fd17dd69-02c0-422e-9277-ccbc73234579" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2034.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2034.png"/></a></figure><figure id="435f94fe-5b75-47b8-bff6-e6e8fed3d786" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2035.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2035.png"/></a></figure><figure id="aa093009-2666-4170-9bf0-2ac76a5bf4ee" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2036.png"><img style="width:360px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2036.png"/></a></figure><h1 id="81b13d81-378d-4f87-a6d3-dfb9ccea0ee9" class="">Ketentuan Penjualan dan Top Up Kartu Flazz (Co-brand)</h1><h2 id="8e0b9d6c-3034-4dd5-a15a-ccef2cddb734" class="">Ketentuan</h2><figure id="6c27527a-efee-4a39-9137-84ad85c435c8" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2037.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2037.png"/></a></figure><figure id="d8156ad8-2eb9-4a61-8845-bd2806dfe3b6" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2038.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2038.png"/></a></figure><h2 id="a56d4787-0180-485d-b2f5-c6444c03d761" class="">Transaksi Penjualan</h2><figure id="a551b25f-de9b-4c84-b2f6-d03cfb3c1286" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2039.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2039.png"/></a></figure><figure id="807224ce-4518-4940-8810-6bb3682772d6" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2040.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2040.png"/></a></figure><figure id="0ff9e436-308e-498d-8239-edbeaab6c32e" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2041.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2041.png"/></a></figure><figure id="c0563857-bf1b-4845-9577-4d970151e523" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2042.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2042.png"/></a></figure><figure id="b444c027-d731-444d-b1a9-4c7a872a476f" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2043.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2043.png"/></a></figure><h2 id="14bb0318-6f2d-4092-9649-23a801a9016a" class="">Top Up dengan Kartu BCA</h2><figure id="b505c816-caa1-41cb-99d6-b6412df9f78e" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2044.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2044.png"/></a></figure><figure id="cbfba9da-9d38-4f1d-8313-6bc2853c9966" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2045.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2045.png"/></a></figure><figure id="7b21294d-802c-4b74-ba0e-a2e49f71700a" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2046.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2046.png"/></a></figure><figure id="0b7f984c-175c-4e58-bb0f-5e63e60b96ac" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2047.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2047.png"/></a></figure><figure id="9b00b3fe-03c5-4833-b62f-c3d058bb7767" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2048.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2048.png"/></a></figure><figure id="409d069b-094f-4039-b046-f7a25a094103" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2049.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2049.png"/></a></figure><figure id="d21730b4-b075-4aaa-a077-e286cc9de309" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2050.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2050.png"/></a></figure><figure id="4d4b1b78-f6c6-4d77-b319-e0b806a39186" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2051.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2051.png"/></a></figure><figure id="0c56b2af-d38a-4ed3-8909-dd90b8a8751d" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2052.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2052.png"/></a></figure><h2 id="8e4c943c-9e0e-4691-9626-36fad7f1c69a" class="">Top Up dengan Tunai</h2><figure id="9f28e43c-4efa-49c6-9c98-dfaba374d734" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2053.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2053.png"/></a></figure><figure id="3faa0bb4-70f7-45b9-9b6b-b16b34c7b051" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2054.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2054.png"/></a></figure><figure id="df8b2509-e200-4060-b8ab-5eea5ceaee93" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2055.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2055.png"/></a></figure><figure id="9eb71029-facc-4aa4-bd52-b4fc70826677" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2056.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2056.png"/></a></figure><figure id="b3964865-ce72-4e04-8cf2-7960577d375b" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2057.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2057.png"/></a></figure><figure id="2a940899-d8f6-4e97-bc7f-ebc62cf916d3" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2058.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2058.png"/></a></figure><figure id="4e0bc24a-6e82-44f2-acff-bf38197e7d7c" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2059.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2059.png"/></a></figure><figure id="9a59ebdc-3d18-4245-9385-0bfd18054765" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2060.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2060.png"/></a></figure><figure id="1a07364a-f41f-4029-8514-217e073a4a7d" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2061.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2061.png"/></a></figure><figure id="66ab6036-a850-4beb-ac5e-8b670780b132" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2062.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2062.png"/></a></figure><figure id="ae58dede-9bd2-476d-b404-0688ee0a345c" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2063.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2063.png"/></a></figure><figure id="8169ad59-a92a-43cc-8192-febe895d0636" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2064.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2064.png"/></a></figure><figure id="4d5fea3e-8516-4025-9910-1fccfa1f0ece" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2065.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2065.png"/></a></figure><figure id="3c47a6c0-51b3-4f5c-b745-958f27d2ab8e" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2066.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2066.png"/></a></figure><figure id="03879289-ffdc-4397-ae15-0ae7723afd03" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2067.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2067.png"/></a></figure><figure id="b6f3f34d-4227-4ad0-97d6-28064a826956" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2068.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2068.png"/></a></figure><figure id="9cda7220-a0b4-4fb2-8532-b44099f20f1c" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2069.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2069.png"/></a></figure><figure id="ddc4dac3-7893-4f9d-a2ee-7311fdc9dcfb" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2070.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2070.png"/></a></figure><h1 id="1cc4f2dc-5454-444a-ab93-f110d0772070" class="">Ketentuan Penjualan dan Top Up dengan Kartu E-Money</h1><figure id="9f30a153-65c7-46f3-af4c-8c0f62c11177" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2071.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2071.png"/></a></figure><figure id="cc7ea9ad-92b6-491a-90be-0a6c6b6b8fca" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2072.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2072.png"/></a></figure><figure id="0169b692-da35-4804-98bb-419b6938d6e7" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2073.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2073.png"/></a></figure><figure id="368ce0f9-a8fb-4627-a7b2-d2315eb7601f" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2074.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2074.png"/></a></figure><h2 id="2ffac616-a724-4d49-88bd-bcf6545e6333" class="">Top Up dengan Kartu Debit Mandiri Customer</h2><figure id="c637e403-ec15-453a-8bea-29a3bab3bee3" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2075.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2075.png"/></a></figure><figure id="88c47fa0-8b8b-4e02-bfa7-cb22b33c00a1" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2076.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2076.png"/></a></figure><figure id="09213c86-e1c0-48ed-bb5d-c489d53fbf57" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2077.png"><img style="width:1235px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2077.png"/></a></figure><figure id="9b5c82bb-b125-4e97-9aea-ea8536c263e3" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2078.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2078.png"/></a></figure><figure id="27d83c68-a0cc-4f8c-a92c-963219d887ab" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2079.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2079.png"/></a></figure><figure id="06e033d4-1d42-4f5f-99e7-f8c215bf345c" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2080.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2080.png"/></a></figure><figure id="7a3929e2-bd87-47f8-9b7d-93faaac0858f" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2081.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2081.png"/></a></figure><figure id="90e51bfe-edd7-4b73-a798-98623077dc52" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2082.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2082.png"/></a></figure><figure id="cd9fa5b7-89a1-4ede-974d-2023b637b6db" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2083.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2083.png"/></a></figure><h2 id="92fc05d0-dbd1-4b61-817c-a00038a92f08" class="">Top Up Tunai</h2><figure id="8e6b5f23-c05e-4d50-b06e-a73ddac3af5f" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2084.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2084.png"/></a></figure><figure id="8a494054-2467-4bf4-8a5b-d311f2a8eb64" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2085.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2085.png"/></a></figure><figure id="7898042d-693b-413f-bdda-22f5a50a3659" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2086.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2086.png"/></a></figure><h2 id="4b581eaa-fcd9-45d8-a8c4-94374ebe6597" class="">Proses Top Up Tunai</h2><figure id="f9efea40-7c08-4456-9469-ce4aebc0440b" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2087.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2087.png"/></a></figure><figure id="5c34901b-1d21-4ccf-9e06-ddcb98eb59e5" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2088.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2088.png"/></a></figure><figure id="64782b25-ee8b-440c-9c63-890885bfa1f8" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2089.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2089.png"/></a></figure><figure id="21fb449a-918a-4a23-81bc-022f908789fa" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2090.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2090.png"/></a></figure><figure id="6bc3bb6d-5248-42d2-8f3b-197954a76154" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2091.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2091.png"/></a></figure><figure id="fdea3c29-59b0-4dfd-b777-a217285f566a" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2092.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2092.png"/></a></figure><figure id="110c4639-fe4e-4cc9-84a5-ee383b224310" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2093.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2093.png"/></a></figure><figure id="77c1a761-4704-4198-b26b-fd3c8b6148f2" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2094.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2094.png"/></a></figure><figure id="633a6bf4-52d4-4ed2-a16d-78aa9047af17" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2095.png"><img style="width:708px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2095.png"/></a></figure><figure id="2dc82d5a-76ab-4155-a157-724a2938c134" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2096.png"><img style="width:646px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2096.png"/></a></figure><figure id="9273f152-278a-4506-b55a-a45fac2d0986" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2097.png"><img style="width:1156px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2097.png"/></a></figure><figure id="7e1c3bfe-cac0-4e49-99a0-b7ab2b124d84" class="image"><a href="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2098.png"><img style="width:350px" src="Transaksi%20PWP,%20Voucher,%20dan%20E-Money%2091bb3896a473476fa8a96c592c288147/Untitled%2098.png"/></a></figure><p id="b0301c86-0fa4-41ec-acbe-9ea3c2fa7633" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
